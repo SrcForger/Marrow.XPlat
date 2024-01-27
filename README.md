@@ -2,7 +2,7 @@
 
 # Marrow XPlat
 
-It is a cross platform (desktop and mobile) application framework for .NET which aims to close the gap between different closed systems by providing reliable real APIs for everyone.
+It is a cross platform (desktop and mobile) application framework for .NET which aims to close the gap between differently evolved systems by providing reliable real APIs for everyone.
 
 ## License
 
