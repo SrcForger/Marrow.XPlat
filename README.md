@@ -1,4 +1,4 @@
-<img src="assets/ProjectBanner.png" alt="Marrow.XPlat project banner" />
+<img src="assets/ProjectBanner.png" height="150" alt="Marrow.XPlat project banner" />
 
 # Marrow XPlat
 
