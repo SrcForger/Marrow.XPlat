@@ -1,6 +1,5 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Sample.ViewModels;
 
 namespace Sample.Views
 {
@@ -11,9 +10,8 @@ namespace Sample.Views
             InitializeComponent();
         }
 
-        private void TestClick1(object? sender, RoutedEventArgs e)
+        private void RefreshClick(object? sender, RoutedEventArgs e)
         {
-            DataContext = new MainViewModel();
         }
     }
 }

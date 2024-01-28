@@ -3,21 +3,23 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:Sample.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Sample.Views.MainView"
-             x:DataType="vm:MainViewModel">
-  <Design.DataContext>
-    <!-- This only sets the DataContext for the previewer in an IDE,
-         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-    <vm:MainViewModel />
-  </Design.DataContext>
+             mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="800"
+             x:Class="Sample.Views.MainView" x:DataType="vm:MainViewModel">
 
-	<StackPanel Orientation="Vertical">
-			
-        <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+	<StackPanel Margin="25" Orientation="Vertical">
+		
+		<TextBlock Text="File system" FontWeight="Bold" FontSize="16" />
+		<TextBlock TextWrapping="WrapWithOverflow">
+			<Run Text="Cache Directory: " FontWeight="Bold" />
+			<Run Text="{Binding CacheDirectory}" />
+		</TextBlock>
+		<TextBlock TextWrapping="WrapWithOverflow">
+			<Run Text="App Data Directory: " FontWeight="Bold" />
+			<Run Text="{Binding AppDataDirectory}" />
+		</TextBlock>
 
-		<Button Content="Click" Click="TestClick1" />
-				
+		<Button Margin="0,20,0,0" HorizontalAlignment="Center" 
+				Content="Refresh!" Click="RefreshClick" />
 	</StackPanel>
 
 </UserControl>

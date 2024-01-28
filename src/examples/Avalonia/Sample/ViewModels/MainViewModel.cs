@@ -1,19 +1,17 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Platform.Storage;
+﻿using Marrow.XPlat.Storage;
 
 namespace Sample.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        public string Greeting => string.Join(" \r\n ",
-        [
-            GetFolder(WellKnownFolder.Desktop),
-            GetFolder(WellKnownFolder.Documents),
-            GetFolder(WellKnownFolder.Downloads),
-            GetFolder(WellKnownFolder.Music),
-            GetFolder(WellKnownFolder.Pictures),
-            GetFolder(WellKnownFolder.Videos)
-        ]);
+        private readonly IFileSystem _fs;
+
+        public MainViewModel(IFileSystem fs)
+        {
+            _fs = fs;
+        }
+
+        public string CacheDirectory => _fs.CacheDirectory;
+        public string AppDataDirectory => _fs.AppDataDirectory;
+    }
 }

@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\framework\Marrow.XPlat.Desktop\Marrow.XPlat.Desktop.csproj" />
+    <ProjectReference Include="..\..\..\framework\Marrow.XPlat.Utils\Marrow.XPlat.Utils.csproj" />
     <ProjectReference Include="..\Sample\Sample.csproj" />
   </ItemGroup>
 </Project>

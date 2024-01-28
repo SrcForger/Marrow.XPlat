@@ -14,7 +14,7 @@ namespace Marrow.XPlat.Utils
 
         private static IServiceProvider? _provider;
 
-        public static void Init(IServiceProvider provider)
+        public static void Init(this IServiceProvider provider)
         {
             _provider = provider;
         }

@@ -1,6 +1,9 @@
 ﻿using System;
 using Avalonia;
 using Avalonia.ReactiveUI;
+using Marrow.XPlat.Utils;
+using Marrow.XPlat.Desktop;
+using Marrow.XPlat.Core;
 
 namespace Sample.Desktop
 {
@@ -11,10 +14,14 @@ namespace Sample.Desktop
             .StartWithClassicDesktopLifetime(args);
 
         public static AppBuilder BuildAvaloniaApp()
-            => AppBuilder.Configure<App>()
-                .UsePlatformDetect()
-                .WithInterFont()
-                .LogToTrace()
-                .UseReactiveUI();
+        {
+            SvcAppLocator.Bind(svc => svc.AddCore().AddDesktop()).Init();
+
+            return AppBuilder.Configure<App>()
+                        .UsePlatformDetect()
+                        .WithInterFont()
+                        .LogToTrace()
+                        .UseReactiveUI();
+        }
     }
 }

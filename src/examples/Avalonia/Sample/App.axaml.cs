@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using Marrow.XPlat.Utils;
 using Sample.ViewModels;
 using Sample.Views;
 
@@ -15,18 +16,20 @@ namespace Sample
 
         public override void OnFrameworkInitializationCompleted()
         {
+            var mainModel = SvcAppLocator.Get<MainViewModel>();
+
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 desktop.MainWindow = new MainWindow
                 {
-                    DataContext = new MainViewModel()
+                    DataContext = mainModel
                 };
             }
             else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
             {
                 singleViewPlatform.MainView = new MainView
                 {
-                    DataContext = new MainViewModel()
+                    DataContext = mainModel
                 };
             }
 
