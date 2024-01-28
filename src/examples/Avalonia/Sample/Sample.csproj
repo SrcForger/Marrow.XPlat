@@ -20,6 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Marrow.XPlat.API\Marrow.XPlat.API.csproj" />
+    <ProjectReference Include="..\..\..\framework\Marrow.XPlat.API\Marrow.XPlat.API.csproj" />
   </ItemGroup>
 </Project>

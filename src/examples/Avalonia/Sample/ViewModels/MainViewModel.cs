@@ -17,11 +17,12 @@ namespace Sample.ViewModels
             GetFolder(WellKnownFolder.Videos)
         ]);
 
-        private Window? GetMainWindow()
+        private Control? GetMainWindow()
         {
             var app = Application.Current;
-            var life = (IClassicDesktopStyleApplicationLifetime?)app?.ApplicationLifetime;
-            var main = life?.MainWindow;
+            var life = app?.ApplicationLifetime;
+            var main = (life as ISingleViewApplicationLifetime)?.MainView ??
+                (life as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
             return main;
         }
 
