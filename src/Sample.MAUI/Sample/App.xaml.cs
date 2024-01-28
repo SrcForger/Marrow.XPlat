@@ -1,11 +1,14 @@
-﻿namespace Sample;
+﻿using Microsoft.Maui.Controls;
 
-public partial class App : Application
+namespace Sample
 {
-	public App()
+	public partial class App : Application
 	{
-		InitializeComponent();
+		public App()
+		{
+			InitializeComponent();
 
-		MainPage = new AppShell();
+			MainPage = new AppShell();
+		}
 	}
 }

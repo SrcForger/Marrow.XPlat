@@ -1,8 +1,44 @@
-﻿namespace Sample.ViewModels;
+﻿using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Platform.Storage;
 
-public class MainViewModel : ViewModelBase
+namespace Sample.ViewModels
 {
-#pragma warning disable CA1822 // Mark members as static
-    public string Greeting => "Welcome to Avalonia!";
-#pragma warning restore CA1822 // Mark members as static
+    public class MainViewModel : ViewModelBase
+    {
+        public string Greeting => string.Join(" \r\n ",
+        [
+            GetFolder(WellKnownFolder.Desktop),
+            GetFolder(WellKnownFolder.Documents),
+            GetFolder(WellKnownFolder.Downloads),
+            GetFolder(WellKnownFolder.Music),
+            GetFolder(WellKnownFolder.Pictures),
+            GetFolder(WellKnownFolder.Videos)
+        ]);
+
+        private Window? GetMainWindow()
+        {
+            var app = Application.Current;
+            var life = (IClassicDesktopStyleApplicationLifetime?)app?.ApplicationLifetime;
+            var main = life?.MainWindow;
+            return main;
+        }
+
+        private IStorageProvider? GetStorageProvider()
+        {
+            var main = GetMainWindow();
+            var top = TopLevel.GetTopLevel(main);
+            var provider = top?.StorageProvider;
+            return provider;
+        }
+
+        private string? GetFolder(WellKnownFolder folder)
+        {
+            var sp = GetStorageProvider();
+            var task = sp?.TryGetWellKnownFolderAsync(folder);
+            var res = task?.GetAwaiter().GetResult();
+            return res?.Path.ToString();
+        }
+    }
 }

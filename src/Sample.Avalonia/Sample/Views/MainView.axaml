@@ -12,5 +12,12 @@
     <vm:MainViewModel />
   </Design.DataContext>
 
-  <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+	<StackPanel Orientation="Vertical">
+			
+        <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+		<Button Content="Click" Click="TestClick1" />
+				
+	</StackPanel>
+
 </UserControl>
