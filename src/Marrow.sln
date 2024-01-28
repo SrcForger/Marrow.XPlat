@@ -23,6 +23,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.Desktop", "examples\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marrow.XPlat.Utils", "framework\Marrow.XPlat.Utils\Marrow.XPlat.Utils.csproj", "{885FD061-7588-4CE5-9D1A-E7001961DB0D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "specifics", "specifics", "{B7BB77E6-3B4F-48BD-9BBB-73F5ADE3F69E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marrow.XPlat.Avalonia", "specifics\Marrow.XPlat.Avalonia\Marrow.XPlat.Avalonia.csproj", "{C40D12D9-E834-43A9-8DCE-0EBF4F48EF02}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,6 +62,10 @@ Global
 		{885FD061-7588-4CE5-9D1A-E7001961DB0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{885FD061-7588-4CE5-9D1A-E7001961DB0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{885FD061-7588-4CE5-9D1A-E7001961DB0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C40D12D9-E834-43A9-8DCE-0EBF4F48EF02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C40D12D9-E834-43A9-8DCE-0EBF4F48EF02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C40D12D9-E834-43A9-8DCE-0EBF4F48EF02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C40D12D9-E834-43A9-8DCE-0EBF4F48EF02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,5 +79,6 @@ Global
 		{8B057E2C-3938-4E2F-BAB2-CB9740AE3FB6} = {BB91DF4D-54DE-4513-861F-FA7523C3407F}
 		{08EC7213-6F4E-426E-B6F0-047D5215558F} = {BB91DF4D-54DE-4513-861F-FA7523C3407F}
 		{885FD061-7588-4CE5-9D1A-E7001961DB0D} = {3032356A-5EB1-48B9-B78F-2D7E2E02A325}
+		{C40D12D9-E834-43A9-8DCE-0EBF4F48EF02} = {B7BB77E6-3B4F-48BD-9BBB-73F5ADE3F69E}
 	EndGlobalSection
 EndGlobal
