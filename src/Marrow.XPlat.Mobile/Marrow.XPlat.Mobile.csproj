@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+
+    <RootNamespace>Marrow.XPlat</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <UseMauiEssentials>true</UseMauiEssentials>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Maui.Essentials" Version="8.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Marrow.XPlat.API\Marrow.XPlat.API.csproj" />
+  </ItemGroup>
+
+</Project>
