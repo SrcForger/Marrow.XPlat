@@ -3,28 +3,29 @@ using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using Sample.ViewModels;
 
-namespace Sample;
-
-public class ViewLocator : IDataTemplate
+namespace Sample
 {
-    public Control? Build(object? data)
+    public class ViewLocator : IDataTemplate
     {
-        if (data is null)
-            return null;
-
-        var name = data.GetType().FullName!.Replace("ViewModel", "View", StringComparison.Ordinal);
-        var type = Type.GetType(name);
-
-        if (type != null)
+        public Control? Build(object? data)
         {
-            return (Control)Activator.CreateInstance(type)!;
+            if (data is null)
+                return null;
+
+            var name = data.GetType().FullName!.Replace("ViewModel", "View", StringComparison.Ordinal);
+            var type = Type.GetType(name);
+
+            if (type != null)
+            {
+                return (Control)Activator.CreateInstance(type)!;
+            }
+
+            return new TextBlock { Text = "Not Found: " + name };
         }
 
-        return new TextBlock { Text = "Not Found: " + name };
-    }
-
-    public bool Match(object? data)
-    {
-        return data is ViewModelBase;
+        public bool Match(object? data)
+        {
+            return data is ViewModelBase;
+        }
     }
 }
