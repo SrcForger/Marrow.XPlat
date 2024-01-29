@@ -1,53 +1,32 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+using Marrow.XPlat.Setup;
 
 namespace Marrow.XPlat.Storage
 {
     public sealed class DesktopFileSystem : IFileSystem
     {
-        public string CacheDirectory => "!!?"; // TODO
+        private readonly Lazy<(string cache, string data)> _data;
 
-        public string AppDataDirectory => GetAllEnv();
-
-
-
-
-
-
-
-
-        private static string GetAllEnv()
+        public DesktopFileSystem()
         {
-            var dict = new Dictionary<string, string>();
-            var targets = Enum.GetValues<EnvironmentVariableTarget>();
-            foreach (var evt in targets)
-            {
-                foreach (var item in Environment.GetEnvironmentVariables(evt).Cast<DictionaryEntry>())
-                {
-                    var key = $"{evt}_{item.Key}";
-                    var val = item.Value?.ToString();
-                    if (string.IsNullOrWhiteSpace(val))
-                        continue;
-                    dict[key] = val;
-                }
-            }
-            var values = Enum.GetValues<Environment.SpecialFolder>();
-            foreach (var value in values)
-            {
-                var key = value.ToString();
-                var folder = Environment.GetFolderPath(value)?.Trim();
-                if (string.IsNullOrWhiteSpace(folder))
-                    continue;
-                dict[key] = folder;
-            }
-            var fin = dict.GroupBy(d => d.Value).Select(d =>
-                (Key: d.Key, Value: string.Join(" | ", d.Select(i => i.Key).Order()))
-            );
-            var args = fin.Select(i => $"{i.Value} = {i.Key}").Order();
-            var text = string.Join(Environment.NewLine, args);
-            return text;
+            _data = new Lazy<(string cache, string data)>(Load);
         }
+
+        private (string cache, string data) Load()
+        {
+            var info = Reflections.GetProductInfo();
+            if (OperatingSystem.IsWindows() &&
+                SystemEnv.TryGetEnvVariable("APPDATA", out var roamAppData) &&
+                SystemEnv.TryGetEnvVariable("LOCALAPPDATA", out var localAppData))
+            {
+                var cacheDir = SystemEnv.CreateGetDir(localAppData, info.Company, info.Product, "Cache");
+                var filesDir = SystemEnv.CreateGetDir(roamAppData, info.Company, info.Product, "Files");
+                return (cacheDir, filesDir);
+            }
+            throw new InvalidOperationException("No support for your OS!");
+        }
+
+        public string CacheDirectory => _data.Value.cache;
+        public string AppDataDirectory => _data.Value.data;
     }
 }

@@ -9,6 +9,11 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <Company>CompanyName</Company>
+    <Product>Sample</Product>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
 
