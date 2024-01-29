@@ -1,9 +1,9 @@
 ﻿using System;
 using Avalonia;
 using Avalonia.ReactiveUI;
+using Marrow.XPlat.Setup;
 using Marrow.XPlat.Utils;
-using Marrow.XPlat.Desktop;
-using Marrow.XPlat.Core;
+using Sample.Setup;
 
 namespace Sample.Desktop
 {

@@ -4,9 +4,9 @@ using Avalonia;
 using Avalonia.Android;
 using Avalonia.ReactiveUI;
 using Android.OS;
+using Marrow.XPlat.Setup;
 using Marrow.XPlat.Utils;
-using Marrow.XPlat.Mobile;
-using Marrow.XPlat.Core;
+using Sample.Setup;
 
 namespace Sample.Android
 {

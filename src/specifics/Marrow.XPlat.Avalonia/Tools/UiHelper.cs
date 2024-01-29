@@ -1,11 +1,11 @@
-using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Controls;
-using Avalonia.Platform.Storage;
-using Avalonia;
-using System.Threading.Tasks;
 using System;
+using System.Threading.Tasks;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Platform.Storage;
 
-namespace Marrow.XPlat.Avalonia
+namespace Marrow.XPlat.Avalonia.Tools
 {
     public static class UiHelper
     {

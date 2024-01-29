@@ -2,7 +2,7 @@ using Marrow.XPlat.Storage;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Maui.ApplicationModel;
 
-namespace Marrow.XPlat.Mobile
+namespace Marrow.XPlat.Setup
 {
     public static class MobileExtensions
     {

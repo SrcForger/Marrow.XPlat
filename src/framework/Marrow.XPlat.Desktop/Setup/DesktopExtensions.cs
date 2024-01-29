@@ -1,7 +1,7 @@
 using Marrow.XPlat.Storage;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Marrow.XPlat.Desktop
+namespace Marrow.XPlat.Setup
 {
     public static class DesktopExtensions
     {

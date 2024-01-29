@@ -1,7 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Sample.ViewModels;
 
-namespace Marrow.XPlat.Core
+namespace Sample.Setup
 {
     public static class CoreExtensions
     {
