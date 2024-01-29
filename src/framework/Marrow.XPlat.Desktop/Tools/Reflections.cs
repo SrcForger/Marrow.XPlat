@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace Marrow.XPlat.Setup
+namespace Marrow.XPlat.Tools
 {
     public static class Reflections
     {

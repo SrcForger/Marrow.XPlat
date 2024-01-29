@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace Marrow.XPlat.Setup
+namespace Marrow.XPlat.Tools
 {
     public static class SystemEnv
     {

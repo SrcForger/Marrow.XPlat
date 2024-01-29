@@ -1,5 +1,5 @@
 using System;
-using Marrow.XPlat.Setup;
+using Marrow.XPlat.Tools;
 
 namespace Marrow.XPlat.Storage
 {
@@ -19,9 +19,16 @@ namespace Marrow.XPlat.Storage
                 SystemEnv.TryGetEnvVariable("APPDATA", out var roamAppData) &&
                 SystemEnv.TryGetEnvVariable("LOCALAPPDATA", out var localAppData))
             {
-                var cacheDir = SystemEnv.CreateGetDir(localAppData, info.Company, info.Product, "Cache");
-                var filesDir = SystemEnv.CreateGetDir(roamAppData, info.Company, info.Product, "Files");
-                return (cacheDir, filesDir);
+                var cDir = SystemEnv.CreateGetDir(localAppData, info.Company, info.Product, "tmp");
+                var fDir = SystemEnv.CreateGetDir(roamAppData, info.Company, info.Product, "dat");
+                return (cDir, fDir);
+            }
+            if (OperatingSystem.IsLinux() &&
+                SystemEnv.TryGetEnvVariable("HOME", out var home))
+            {
+                var cf = SystemEnv.CreateGetDir(home, ".cache", info.Company, info.Product, "tmp");
+                var ff = SystemEnv.CreateGetDir(home, ".config", info.Company, info.Product, "dat");
+                return (cf, ff);
             }
             throw new InvalidOperationException("No support for your OS!");
         }
