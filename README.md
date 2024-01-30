@@ -4,6 +4,14 @@
 
 It is a cross platform (desktop and mobile) application framework for .NET which aims to close the gap between differently evolved systems by providing reliable real APIs for everyone.
 
+## Status
+
+| Group | Interface | Members |
+| --- | --- | --- |
+| ApplicationModel | IBrowser | OpenAsync(uri) |
+| Storage | IFileSystem | CacheDirectory, AppDataDirectory |
+| Storage | IPreferences | Clear, Set(key, value), Get(key, default), ContainsKey(key), Remove(key) |
+
 ## Build
 
 ```bash
