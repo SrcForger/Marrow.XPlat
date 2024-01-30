@@ -19,6 +19,4 @@ namespace Marrow.XPlat.Tools
             return new ProductInfo(company, product);
         }
     }
-
-    public record struct ProductInfo(string Company, string Product);
 }

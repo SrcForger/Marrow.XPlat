@@ -1,6 +1,7 @@
 using Marrow.XPlat.ApplicationModel;
 using Marrow.XPlat.Storage;
 using Microsoft.Extensions.DependencyInjection;
+using Marrow.XPlat.ApplicationModel.Communication;
 
 namespace Marrow.XPlat.Setup
 {
@@ -11,6 +12,7 @@ namespace Marrow.XPlat.Setup
             builder.AddSingleton<IFileSystem, DesktopFileSystem>();
             builder.AddSingleton<IPreferences, DesktopPreferences>();
             builder.AddSingleton<IBrowser, DesktopBrowser>();
+            builder.AddSingleton<IEmail, DesktopEmail>();
             return builder;
         }
     }

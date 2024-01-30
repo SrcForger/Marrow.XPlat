@@ -1,4 +1,5 @@
 using Marrow.XPlat.ApplicationModel;
+using Marrow.XPlat.ApplicationModel.Communication;
 using Marrow.XPlat.Storage;
 using Microsoft.Extensions.DependencyInjection;
 using MAM = Microsoft.Maui.ApplicationModel;
@@ -12,6 +13,7 @@ namespace Marrow.XPlat.Setup
             builder.AddSingleton<IFileSystem, MobileFileSystem>();
             builder.AddSingleton<IPreferences, MobilePreferences>();
             builder.AddSingleton<IBrowser, MobileBrowser>();
+            builder.AddSingleton<IEmail, MobileEmail>();
             return builder;
         }
 

@@ -32,16 +32,16 @@ namespace Sample.ViewModels
                 _pref.Set("share", 25.12f);
                 _pref.Set("count", 30934984L);
                 _pref.Set("time", DateTime.Now);
-                string firstName = _pref.Get("first_name", "Unknown");
-                int age = _pref.Get("age", -1);
-                bool hasPets = _pref.Get("has_pets", false);
-                double price = _pref.Get("price", default(double));
-                float share = _pref.Get("share", default(float));
-                long count = _pref.Get("count", default(long));
-                DateTime time = _pref.Get("time", default(DateTime));
-                bool hasKey1 = _pref.ContainsKey("price");
+                var firstName = _pref.Get("first_name", "Unknown");
+                var age = _pref.Get("age", -1);
+                var hasPets = _pref.Get("has_pets", false);
+                var price = _pref.Get("price", default(double));
+                var share = _pref.Get("share", default(float));
+                var count = _pref.Get("count", default(long));
+                var time = _pref.Get("time", default(DateTime));
+                var hasKey1 = _pref.ContainsKey("price");
                 _pref.Remove("price");
-                bool hasKey2 = _pref.ContainsKey("price");
+                var hasKey2 = _pref.ContainsKey("price");
                 var r = new PrefTest(firstName, age, hasPets, price, share, count, time, hasKey1, hasKey2);
                 return r.ToString();
             }
