@@ -9,6 +9,7 @@ namespace Marrow.XPlat.Setup
         public static IServiceCollection AddMobile(this IServiceCollection builder)
         {
             builder.AddSingleton<IFileSystem, MobileFileSystem>();
+            builder.AddSingleton<IPreferences, MobilePreferences>();
             return builder;
         }
 

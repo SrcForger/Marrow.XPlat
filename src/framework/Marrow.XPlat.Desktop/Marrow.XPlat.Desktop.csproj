@@ -11,4 +11,8 @@
     <ProjectReference Include="..\Marrow.XPlat.API\Marrow.XPlat.API.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Tomlyn" Version="0.17.0" />
+  </ItemGroup>
+
 </Project>

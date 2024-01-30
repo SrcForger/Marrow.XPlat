@@ -8,6 +8,7 @@ namespace Marrow.XPlat.Setup
         public static IServiceCollection AddDesktop(this IServiceCollection builder)
         {
             builder.AddSingleton<IFileSystem, DesktopFileSystem>();
+            builder.AddSingleton<IPreferences, DesktopPreferences>();
             return builder;
         }
     }

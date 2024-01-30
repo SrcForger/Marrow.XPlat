@@ -8,7 +8,8 @@
 
 	<StackPanel Margin="25" Orientation="Vertical">
 		
-		<TextBlock Text="File system" FontWeight="Bold" FontSize="16" />
+		<TextBlock Margin="0,0,0,0"
+			Text="File system" FontWeight="Bold" FontSize="16" />
 		<TextBlock TextWrapping="WrapWithOverflow">
 			<Run Text="Cache Directory: " FontWeight="Bold" />
 			<Run Text="{Binding CacheDirectory}" />
@@ -16,6 +17,13 @@
 		<TextBlock TextWrapping="WrapWithOverflow">
 			<Run Text="App Data Directory: " FontWeight="Bold" />
 			<Run Text="{Binding AppDataDirectory}" />
+		</TextBlock>
+
+		<TextBlock Margin="0,20,0,0"
+			Text="Preferences" FontWeight="Bold" FontSize="16" />
+		<TextBlock TextWrapping="WrapWithOverflow">
+			<Run Text="Debug: " FontWeight="Bold" />
+			<Run Text="{Binding Preferences}" />
 		</TextBlock>
 
 		<Button Margin="0,20,0,0" HorizontalAlignment="Center" 
