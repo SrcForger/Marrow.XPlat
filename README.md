@@ -9,6 +9,7 @@ It is a cross platform (desktop and mobile) application framework for .NET which
 | Group | Interface | Members |
 | --- | --- | --- |
 | ApplicationModel | IBrowser | OpenAsync(uri) |
+| AM Communication | IEmail | IsComposeSupported, ComposeAsync(message) |
 | Storage | IFileSystem | CacheDirectory, AppDataDirectory |
 | Storage | IPreferences | Clear, Set(key, value), Get(key, default), ContainsKey(key), Remove(key) |
 
