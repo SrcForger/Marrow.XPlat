@@ -12,7 +12,7 @@ namespace Marrow.XPlat.Storage
             _data = new Lazy<(string cache, string data)>(Load);
         }
 
-        private (string cache, string data) Load()
+        private static (string cache, string data) Load()
         {
             var info = Reflections.GetProductInfo();
             if (OperatingSystem.IsWindows() &&
@@ -29,6 +29,14 @@ namespace Marrow.XPlat.Storage
                 var cf = SystemEnv.CreateGetDir(home, ".cache", info.Company, info.Product, "tmp");
                 var ff = SystemEnv.CreateGetDir(home, ".config", info.Company, info.Product, "dat");
                 return (cf, ff);
+            }
+            if (OperatingSystem.IsMacOS() &&
+                SystemEnv.TryGetEnvVariable("HOME", out home))
+            {
+                var lib = SystemEnv.CreateGetDir(home, "Library");
+                var c = SystemEnv.CreateGetDir(lib, "Caches", info.Company, info.Product, "tmp");
+                var f = SystemEnv.CreateGetDir(lib, "Application Support", info.Company, info.Product, "dat");
+                return (c, f);
             }
             throw new InvalidOperationException("No support for your OS!");
         }
