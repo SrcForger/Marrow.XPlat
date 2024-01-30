@@ -1,3 +1,4 @@
+using Marrow.XPlat.ApplicationModel;
 using Marrow.XPlat.Storage;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -9,6 +10,7 @@ namespace Marrow.XPlat.Setup
         {
             builder.AddSingleton<IFileSystem, DesktopFileSystem>();
             builder.AddSingleton<IPreferences, DesktopPreferences>();
+            builder.AddSingleton<IBrowser, DesktopBrowser>();
             return builder;
         }
     }

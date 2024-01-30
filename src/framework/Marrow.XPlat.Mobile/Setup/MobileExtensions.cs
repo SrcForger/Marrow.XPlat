@@ -1,6 +1,7 @@
+using Marrow.XPlat.ApplicationModel;
 using Marrow.XPlat.Storage;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Maui.ApplicationModel;
+using MAM = Microsoft.Maui.ApplicationModel;
 
 namespace Marrow.XPlat.Setup
 {
@@ -10,15 +11,16 @@ namespace Marrow.XPlat.Setup
         {
             builder.AddSingleton<IFileSystem, MobileFileSystem>();
             builder.AddSingleton<IPreferences, MobilePreferences>();
+            builder.AddSingleton<IBrowser, MobileBrowser>();
             return builder;
         }
 
 #if ANDROID
         public static void DoCreate(this Android.App.Activity activity, Android.OS.Bundle savedState)
-            => Platform.Init(activity, savedState);
+            => MAM.Platform.Init(activity, savedState);
 
         public static void DoRequest(this Android.Content.PM.Permission[] grants, int reqCode, string[] perms)
-            => Platform.OnRequestPermissionsResult(reqCode, perms, grants);
+            => MAM.Platform.OnRequestPermissionsResult(reqCode, perms, grants);
 #endif
     }
 }
