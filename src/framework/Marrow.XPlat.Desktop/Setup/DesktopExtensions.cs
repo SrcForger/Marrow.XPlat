@@ -13,6 +13,7 @@ namespace Marrow.XPlat.Setup
             builder.AddSingleton<IPreferences, DesktopPreferences>();
             builder.AddSingleton<IBrowser, DesktopBrowser>();
             builder.AddSingleton<IEmail, DesktopEmail>();
+            builder.AddSingleton<ISecureStorage, DesktopSecure>();
             return builder;
         }
     }

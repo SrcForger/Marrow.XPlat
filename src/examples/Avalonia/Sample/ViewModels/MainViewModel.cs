@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Marrow.XPlat.Storage;
 
 namespace Sample.ViewModels
@@ -7,11 +8,13 @@ namespace Sample.ViewModels
     {
         private readonly IFileSystem _fs;
         private readonly IPreferences _pref;
+        private readonly ISecureStorage _secure;
 
-        public MainViewModel(IFileSystem fs, IPreferences pref)
+        public MainViewModel(IFileSystem fs, IPreferences pref, ISecureStorage secure)
         {
             _fs = fs;
             _pref = pref;
+            _secure = secure;
         }
 
         public string CacheDirectory => _fs.CacheDirectory;
@@ -46,5 +49,22 @@ namespace Sample.ViewModels
                 return r.ToString();
             }
         }
+
+        public record SecTest(string? AuthToken, bool Success, string? End, string? Pass);
+
+        private async Task<string> GetSecurities()
+        {
+            _secure.RemoveAll();
+            await _secure.SetAsync("oauth_token", "secret-oauth-token-value");
+            await _secure.SetAsync("good_password", "well-beaver-12345");
+            var token1 = await _secure.GetAsync("oauth_token");
+            bool success = _secure.Remove("oauth_token");
+            var token2 = await _secure.GetAsync("oauth_token");
+            var token3 = await _secure.GetAsync("good_password");
+            var r = new SecTest(token1, success, token2, token3);
+            return r.ToString();
+        }
+
+        public string Securities => GetSecurities().GetAwaiter().GetResult();
     }
 }

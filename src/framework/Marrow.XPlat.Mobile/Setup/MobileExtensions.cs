@@ -14,6 +14,7 @@ namespace Marrow.XPlat.Setup
             builder.AddSingleton<IPreferences, MobilePreferences>();
             builder.AddSingleton<IBrowser, MobileBrowser>();
             builder.AddSingleton<IEmail, MobileEmail>();
+            builder.AddSingleton<ISecureStorage, MobileSecure>();
             return builder;
         }
 

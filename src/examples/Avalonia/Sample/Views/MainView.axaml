@@ -26,6 +26,13 @@
 			<Run Text="{Binding Preferences}" />
 		</TextBlock>
 
+		<TextBlock Margin="0,20,0,0"
+			Text="Secure storage" FontWeight="Bold" FontSize="16" />
+		<TextBlock TextWrapping="WrapWithOverflow">
+			<Run Text="Debug: " FontWeight="Bold" />
+			<Run Text="{Binding Securities}" />
+		</TextBlock>
+
 		<StackPanel Margin="0,20,0,0" Orientation="Horizontal"
 					HorizontalAlignment="Center">
 			<Button Content="Open URL!" Click="OpenUrlClick" />

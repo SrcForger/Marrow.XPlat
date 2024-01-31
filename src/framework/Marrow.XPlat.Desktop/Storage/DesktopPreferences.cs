@@ -6,20 +6,24 @@ using Tomlyn.Model;
 
 namespace Marrow.XPlat.Storage
 {
-    public sealed class DesktopPreferences : IPreferences
+    public class DesktopPreferences : IPreferences
     {
         private readonly IFileSystem _fs;
+        private readonly string _name;
+        private readonly string _ext;
         private readonly Lazy<TomlTable> _model;
 
-        public DesktopPreferences(IFileSystem fs)
+        public DesktopPreferences(IFileSystem fs, string name = "preferences", string ext = "toml")
         {
             _fs = fs;
+            _name = name;
+            _ext = ext;
             _model = new Lazy<TomlTable>(ReadToml);
         }
 
-        private string GetFileName(string name = "preferences")
+        private string GetFileName()
         {
-            var path = Path.Combine(_fs.AppDataDirectory, $"{name}.toml");
+            var path = Path.Combine(_fs.AppDataDirectory, $"{_name}.{_ext}");
             return path;
         }
 
