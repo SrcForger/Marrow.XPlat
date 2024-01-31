@@ -3,6 +3,7 @@ using Avalonia;
 using Avalonia.ReactiveUI;
 using Marrow.XPlat.Setup;
 using Marrow.XPlat.Utils;
+using Marrow.XPlat.Avalonia.Setup;
 using Sample.Setup;
 
 namespace Sample.Desktop
@@ -15,7 +16,7 @@ namespace Sample.Desktop
 
         public static AppBuilder BuildAvaloniaApp()
         {
-            SvcAppLocator.Bind(svc => svc.AddCore().AddDesktop()).Init();
+            SvcAppLocator.Bind(svc => svc.AddCore().AddDesktop().AddGui()).Init();
 
             return AppBuilder.Configure<App>()
                         .UsePlatformDetect()

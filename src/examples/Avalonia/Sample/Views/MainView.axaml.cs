@@ -2,9 +2,12 @@ using System;
 using System.Collections.Generic;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Media.Imaging;
 using Marrow.XPlat.ApplicationModel;
 using Marrow.XPlat.ApplicationModel.Communication;
+using Marrow.XPlat.Media;
 using Marrow.XPlat.Utils;
+using Sample.ViewModels;
 
 namespace Sample.Views
 {
@@ -15,8 +18,23 @@ namespace Sample.Views
             InitializeComponent();
         }
 
+        private MainViewModel Model => (MainViewModel)DataContext!;
+
         private void RefreshClick(object? sender, RoutedEventArgs e)
         {
+        }
+
+        private async void DoScreenClick(object? sender, RoutedEventArgs e)
+        {
+            var shot = SvcAppLocator.Get<IScreenshot>();
+
+            if (shot.IsCaptureSupported)
+            {
+                var screen = await shot.CaptureAsync();
+                var stream = await screen.OpenReadAsync();
+                var bitmap = new Bitmap(stream);
+                Model.LastScreenImg = bitmap;
+            }
         }
 
         private async void OpenUrlClick(object? sender, RoutedEventArgs e)

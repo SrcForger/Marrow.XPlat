@@ -5,9 +5,11 @@ using Avalonia.Media.Imaging;
 
 namespace Marrow.XPlat.Avalonia.Tools
 {
+    public record RenderedImg(MemoryStream Stream, Size Size);
+
     public static class PixelHelper
     {
-        public static MemoryStream RenderToImage(this Control control, int dpi = 96)
+        public static RenderedImg RenderToImage(this Control control, int dpi = 96)
         {
             var pxSize = new PixelSize((int)control.Width, (int)control.Height);
             var size = new Size(control.Width, control.Height);
@@ -19,7 +21,7 @@ namespace Marrow.XPlat.Avalonia.Tools
             var mem = new MemoryStream();
             bitmap.Save(mem);
             mem.Position = 0L;
-            return mem;
+            return new RenderedImg(mem, bitmap.Size);
         }
     }
 }

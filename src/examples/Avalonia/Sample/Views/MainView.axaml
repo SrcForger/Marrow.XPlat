@@ -6,6 +6,7 @@
              mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="800"
              x:Class="Sample.Views.MainView" x:DataType="vm:MainViewModel">
 
+	<ScrollViewer>
 	<StackPanel Margin="25" Orientation="Vertical">
 		
 		<TextBlock Margin="0,0,0,0"
@@ -33,12 +34,21 @@
 			<Run Text="{Binding Securities}" />
 		</TextBlock>
 
-		<StackPanel Margin="0,20,0,0" Orientation="Horizontal"
+		<TextBlock Margin="0,20,0,0"
+			Text="Screenshot" FontWeight="Bold" FontSize="16" />
+		<Border BorderBrush="Gray" BorderThickness="1">
+			<Image Source="{Binding LastScreenImg}" 
+				   MaxHeight="400" />
+		</Border>
+
+		<WrapPanel Margin="0,20,0,0" Orientation="Horizontal"
 					HorizontalAlignment="Center">
 			<Button Content="Open URL!" Click="OpenUrlClick" />
 			<Button Content="Send mail!" Click="SendMailClick" />
+			<Button Content="Screenshot!" Click="DoScreenClick" />
 			<Button Content="Refresh!"  Click="RefreshClick" />
-		</StackPanel>
+		</WrapPanel>
 	</StackPanel>
+	</ScrollViewer>
 
 </UserControl>
