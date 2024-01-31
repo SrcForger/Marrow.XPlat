@@ -18,10 +18,16 @@ namespace Marrow.XPlat.Avalonia.Tools
             return main;
         }
 
-        public static IStorageProvider? GetStorageProvider()
+        public static TopLevel? GetTopLevel()
         {
             var main = GetMainView();
             var top = TopLevel.GetTopLevel(main);
+            return top;
+        }
+
+        public static IStorageProvider? GetStorageProvider()
+        {
+            var top = GetTopLevel();
             var provider = top?.StorageProvider;
             return provider;
         }
