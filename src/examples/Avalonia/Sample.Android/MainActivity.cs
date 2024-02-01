@@ -30,12 +30,12 @@ namespace Sample.Android
         protected override void OnCreate(Bundle savedState)
         {
             base.OnCreate(savedState);
-            MobileExtensions.DoCreate(this, savedState);
+            this.DoCreate(savedState);
         }
 
         public override void OnRequestPermissionsResult(int reqCode, string[] perms, Permission[] grants)
         {
-            MobileExtensions.DoRequest(grants, reqCode, perms);
+            grants.DoRequest(reqCode, perms);
             base.OnRequestPermissionsResult(reqCode, perms, grants);
         }
     }

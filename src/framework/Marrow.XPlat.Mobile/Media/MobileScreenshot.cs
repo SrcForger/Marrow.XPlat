@@ -22,7 +22,7 @@ namespace Marrow.XPlat.Media
             return conv;
         }
 
-        internal sealed class ScreenshotResult : IScreenshotResult
+        private sealed class ScreenshotResult : IScreenshotResult
         {
             private readonly MMM.IScreenshotResult _current;
 

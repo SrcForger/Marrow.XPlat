@@ -1,8 +1,9 @@
 using System.IO;
 using System.Threading.Tasks;
 using Marrow.XPlat.Avalonia.Tools;
+using Marrow.XPlat.Media;
 
-namespace Marrow.XPlat.Media
+namespace Marrow.XPlat.Avalonia.Media
 {
     public sealed class AvalScreenshot : IScreenshot
     {
@@ -11,12 +12,12 @@ namespace Marrow.XPlat.Media
         public Task<IScreenshotResult> CaptureAsync()
         {
             var view = UiHelper.GetMainView()!;
-            var image = PixelHelper.RenderToImage(view);
+            var image = view.RenderToImage();
             IScreenshotResult res = new ScreenshotResult(image);
             return Task.FromResult(res);
         }
 
-        internal sealed class ScreenshotResult : IScreenshotResult
+        private sealed class ScreenshotResult : IScreenshotResult
         {
             private readonly RenderedImg _image;
 
