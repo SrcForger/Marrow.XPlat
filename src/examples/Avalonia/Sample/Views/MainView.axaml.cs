@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
@@ -8,6 +9,7 @@ using Marrow.XPlat.ApplicationModel;
 using Marrow.XPlat.ApplicationModel.Communication;
 using Marrow.XPlat.ApplicationModel.DataTransfer;
 using Marrow.XPlat.Media;
+using Marrow.XPlat.Storage;
 using Marrow.XPlat.Utils;
 using Sample.ViewModels;
 
@@ -65,6 +67,41 @@ namespace Sample.Views
             var clip = SvcAppLocator.Get<IClipboard>();
 
             await clip.SetTextAsync(null);
+        }
+
+        private async void PickFileClick(object? sender, RoutedEventArgs e)
+        {
+            var filePicker = SvcAppLocator.Get<IFilePicker>();
+
+            var options = new PickOptions { PickerTitle = "Please select an image file" };
+            if (await PickAndShow(filePicker, options) is { } result)
+            {
+                Model.FilePickedName = result.FileName;
+                Model.FilePickedPath = result.FullPath;
+            }
+        }
+
+        private async Task<IFileResult?> PickAndShow(IFilePicker filePicker, PickOptions options)
+        {
+            try
+            {
+                var result = await filePicker.PickAsync(options);
+                if (result != null)
+                {
+                    if (result.FileName.EndsWith("jpg", StringComparison.OrdinalIgnoreCase) ||
+                        result.FileName.EndsWith("png", StringComparison.OrdinalIgnoreCase))
+                    {
+                        await using var stream = await result.OpenReadAsync();
+                        Model.LastScreenImg = new Bitmap(stream);
+                    }
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+            return null;
         }
 
         private async void OpenUrlClick(object? sender, RoutedEventArgs e)

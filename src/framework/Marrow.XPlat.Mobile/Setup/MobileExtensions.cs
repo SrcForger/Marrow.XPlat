@@ -19,6 +19,7 @@ namespace Marrow.XPlat.Setup
             builder.AddSingleton<ISecureStorage, MobileSecure>();
             builder.AddSingleton<IScreenshot, MobileScreenshot>();
             builder.AddSingleton<IClipboard, MobileClipboard>();
+            builder.AddSingleton<IFilePicker, MobileFilePicker>();
             return builder;
         }
 

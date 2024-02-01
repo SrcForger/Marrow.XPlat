@@ -44,8 +44,19 @@
 		<TextBlock Margin="0,20,0,0"
 		           Text="Clipboard" FontWeight="Bold" FontSize="16" />
 		<TextBlock TextWrapping="WrapWithOverflow">
-			<Run Text="Debug: " FontWeight="Bold" />
+			<Run Text="Last content: " FontWeight="Bold" />
 			<Run Text="{Binding ClippedText}" />
+		</TextBlock>
+		
+		<TextBlock Margin="0,20,0,0"
+		           Text="File picker" FontWeight="Bold" FontSize="16" />
+		<TextBlock TextWrapping="WrapWithOverflow">
+			<Run Text="Name: " FontWeight="Bold" />
+			<Run Text="{Binding FilePickedName}" />
+		</TextBlock>
+		<TextBlock TextWrapping="WrapWithOverflow">
+			<Run Text="Path: " FontWeight="Bold" />
+			<Run Text="{Binding FilePickedPath}" />
 		</TextBlock>
 		
 		<WrapPanel Margin="0,20,0,0" Orientation="Horizontal"
@@ -55,6 +66,7 @@
 			<Button Content="Screenshot!" Click="DoScreenClick" />
 			<Button Content="Write CB!" Click="SetClipTxtClick" />
 			<Button Content="Read CB!" Click="ReadClipTxtClick" />
+			<Button Content="Pick file!" Click="PickFileClick" />
 			<Button Content="Refresh!"  Click="RefreshClick" />
 		</WrapPanel>
 	</StackPanel>

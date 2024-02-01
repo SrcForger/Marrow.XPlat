@@ -46,6 +46,12 @@ namespace Sample.ViewModels
 
         [ObservableProperty]
         private string? _clippedText;
+
+        [ObservableProperty] 
+        private string? _filePickedName;
+        
+        [ObservableProperty] 
+        private string? _filePickedPath;
         
         public record PrefTest(string FirstName, int Age, bool HasPets, double Price,
             float Share, long Count, DateTime Time, bool HasKey1, bool HasKey2);
@@ -82,7 +88,7 @@ namespace Sample.ViewModels
             await _secure.SetAsync("oauth_token", "secret-oauth-token-value");
             await _secure.SetAsync("good_password", "well-beaver-12345");
             var token1 = await _secure.GetAsync("oauth_token");
-            bool success = _secure.Remove("oauth_token");
+            var success = _secure.Remove("oauth_token");
             var token2 = await _secure.GetAsync("oauth_token");
             var token3 = await _secure.GetAsync("good_password");
             var r = new SecTest(token1, success, token2, token3);
