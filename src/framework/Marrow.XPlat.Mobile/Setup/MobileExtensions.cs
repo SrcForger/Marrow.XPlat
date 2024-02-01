@@ -1,5 +1,6 @@
 using Marrow.XPlat.ApplicationModel;
 using Marrow.XPlat.ApplicationModel.Communication;
+using Marrow.XPlat.ApplicationModel.DataTransfer;
 using Marrow.XPlat.Media;
 using Marrow.XPlat.Storage;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +18,7 @@ namespace Marrow.XPlat.Setup
             builder.AddSingleton<IEmail, MobileEmail>();
             builder.AddSingleton<ISecureStorage, MobileSecure>();
             builder.AddSingleton<IScreenshot, MobileScreenshot>();
+            builder.AddSingleton<IClipboard, MobileClipboard>();
             return builder;
         }
 

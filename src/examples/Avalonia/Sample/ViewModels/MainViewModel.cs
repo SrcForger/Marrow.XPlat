@@ -30,13 +30,13 @@ namespace Sample.ViewModels
         }
 
         [ObservableProperty]
-        public string _cacheDirectory;
+        private string _cacheDirectory;
 
         [ObservableProperty]
-        public string _appDataDirectory;
+        private string _appDataDirectory;
 
         [ObservableProperty]
-        public string _preferences;
+        private string _preferences;
 
         [ObservableProperty]
         private string _securities;
@@ -44,6 +44,9 @@ namespace Sample.ViewModels
         [ObservableProperty]
         private IImage? _lastScreenImg;
 
+        [ObservableProperty]
+        private string? _clippedText;
+        
         public record PrefTest(string FirstName, int Age, bool HasPets, double Price,
             float Share, long Count, DateTime Time, bool HasKey1, bool HasKey2);
 

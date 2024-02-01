@@ -40,12 +40,21 @@
 			<Image Source="{Binding LastScreenImg}" 
 				   MaxHeight="400" />
 		</Border>
-
+		
+		<TextBlock Margin="0,20,0,0"
+		           Text="Clipboard" FontWeight="Bold" FontSize="16" />
+		<TextBlock TextWrapping="WrapWithOverflow">
+			<Run Text="Debug: " FontWeight="Bold" />
+			<Run Text="{Binding ClippedText}" />
+		</TextBlock>
+		
 		<WrapPanel Margin="0,20,0,0" Orientation="Horizontal"
 					HorizontalAlignment="Center">
 			<Button Content="Open URL!" Click="OpenUrlClick" />
 			<Button Content="Send mail!" Click="SendMailClick" />
 			<Button Content="Screenshot!" Click="DoScreenClick" />
+			<Button Content="Write CB!" Click="SetClipTxtClick" />
+			<Button Content="Read CB!" Click="ReadClipTxtClick" />
 			<Button Content="Refresh!"  Click="RefreshClick" />
 		</WrapPanel>
 	</StackPanel>

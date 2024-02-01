@@ -5,8 +5,6 @@ using Avalonia.Media.Imaging;
 
 namespace Marrow.XPlat.Avalonia.Tools
 {
-    public record RenderedImg(MemoryStream Stream, Size Size);
-
     public static class PixelHelper
     {
         public static RenderedImg RenderToImage(this Control control, int dpi = 96)

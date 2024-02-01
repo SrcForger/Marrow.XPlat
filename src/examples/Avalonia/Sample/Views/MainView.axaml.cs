@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Media.Imaging;
 using Marrow.XPlat.ApplicationModel;
 using Marrow.XPlat.ApplicationModel.Communication;
+using Marrow.XPlat.ApplicationModel.DataTransfer;
 using Marrow.XPlat.Media;
 using Marrow.XPlat.Utils;
 using Sample.ViewModels;
@@ -35,6 +37,34 @@ namespace Sample.Views
                 var bitmap = new Bitmap(stream);
                 Model.LastScreenImg = bitmap;
             }
+        }
+
+        private async void SetClipTxtClick(object? sender, RoutedEventArgs e)
+        {
+            var clip = SvcAppLocator.Get<IClipboard>();
+
+            await clip.SetTextAsync($"This text was created at {DateTime.Now:u}");
+        }
+        
+        private async void ReadClipTxtClick(object? sender, RoutedEventArgs e)
+        {
+            var clip = SvcAppLocator.Get<IClipboard>();
+
+            var text = await clip.GetTextAsync();
+            if (text != null)
+            {
+                Model.ClippedText = text;
+                await ClearClipboard();
+            }
+            else
+                Model.ClippedText = "Clipboard is empty";
+        }
+
+        private static async Task ClearClipboard()
+        {
+            var clip = SvcAppLocator.Get<IClipboard>();
+
+            await clip.SetTextAsync(null);
         }
 
         private async void OpenUrlClick(object? sender, RoutedEventArgs e)
