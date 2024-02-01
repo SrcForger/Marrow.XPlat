@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Marrow.XPlat.ApplicationModel;
+using Marrow.XPlat.Devices;
 using Marrow.XPlat.Storage;
 
 namespace Sample.ViewModels
@@ -11,12 +14,16 @@ namespace Sample.ViewModels
         private readonly IFileSystem _fs;
         private readonly IPreferences _pref;
         private readonly ISecureStorage _secure;
+        private readonly IDeviceInfo _dev;
+        private readonly IAppInfo _app;
 
-        public MainViewModel(IFileSystem fs, IPreferences pref, ISecureStorage secure)
+        public MainViewModel(IFileSystem fs, IPreferences pref, ISecureStorage secure, IDeviceInfo dev, IAppInfo app)
         {
             _fs = fs;
             _pref = pref;
             _secure = secure;
+            _dev = dev;
+            _app = app;
             Task.Run(DoInit);
         }
 
@@ -27,6 +34,8 @@ namespace Sample.ViewModels
             AppDataDirectory = _fs.AppDataDirectory;
             Preferences = GetPreferences();
             Securities = await GetSecurities();
+            AppInfo = GetAppInfo();
+            DevInfo = GetDevInfo();
         }
 
         [ObservableProperty]
@@ -40,6 +49,12 @@ namespace Sample.ViewModels
 
         [ObservableProperty]
         private string _securities;
+
+        [ObservableProperty]
+        private string _appInfo;
+        
+        [ObservableProperty]
+        private string _devInfo;
 
         [ObservableProperty]
         private IImage? _lastScreenImg;
@@ -93,6 +108,30 @@ namespace Sample.ViewModels
             var token3 = await _secure.GetAsync("good_password");
             var r = new SecTest(token1, success, token2, token3);
             return r.ToString();
+        }
+
+        private string GetAppInfo()
+        {
+            var sb = new List<string>
+            {
+                $"N: {_app.Name}",
+                $"V: {_app.VersionString}",
+                $"B: {_app.BuildString}",
+                $"P: {_app.PackageName}"
+            };
+            return string.Join(", ", sb).Trim();
+        }
+
+        private string GetDevInfo()
+        {
+            var sb = new List<string>
+            {
+                $"M: {_dev.Model}",
+                $"H: {_dev.Manufacturer}",
+                $"N: {_dev.Name}",
+                $"O: {_dev.VersionString}"
+            };
+            return string.Join(", ", sb).Trim();
         }
     }
 }

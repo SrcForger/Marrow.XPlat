@@ -1,6 +1,7 @@
 using Marrow.XPlat.ApplicationModel;
 using Marrow.XPlat.ApplicationModel.Communication;
 using Marrow.XPlat.ApplicationModel.DataTransfer;
+using Marrow.XPlat.Devices;
 using Marrow.XPlat.Media;
 using Marrow.XPlat.Storage;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,6 +21,8 @@ namespace Marrow.XPlat.Setup
             builder.AddSingleton<IScreenshot, MobileScreenshot>();
             builder.AddSingleton<IClipboard, MobileClipboard>();
             builder.AddSingleton<IFilePicker, MobileFilePicker>();
+            builder.AddSingleton<IAppInfo, MobileAppInfo>();
+            builder.AddSingleton<IDeviceInfo, MobileDeviceInfo>();
             return builder;
         }
 

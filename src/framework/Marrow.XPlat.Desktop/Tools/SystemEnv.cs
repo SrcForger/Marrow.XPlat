@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 namespace Marrow.XPlat.Tools
 {
@@ -30,6 +32,23 @@ namespace Marrow.XPlat.Tools
             if (!Directory.Exists(path))
                 path = Directory.CreateDirectory(path).FullName;
             return path;
+        }
+
+        public static bool TryGetEnvFile(string file, out Dictionary<string, string> dict)
+        {
+            dict = new Dictionary<string, string>();
+            if (File.Exists(file))
+            {
+                var lines = File.ReadLines(file, Encoding.UTF8);
+                foreach (var item in lines)
+                {
+                    var parts = item.Split('=', 2);
+                    var key = parts[0].ToLowerInvariant();
+                    var val = parts[1].Trim('"').Trim();
+                    dict[key] = val;
+                }
+            }
+            return dict.Count >= 1;
         }
     }
 }

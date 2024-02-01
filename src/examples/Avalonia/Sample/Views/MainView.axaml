@@ -23,14 +23,14 @@
 		<TextBlock Margin="0,20,0,0"
 			Text="Preferences" FontWeight="Bold" FontSize="16" />
 		<TextBlock TextWrapping="WrapWithOverflow">
-			<Run Text="Debug: " FontWeight="Bold" />
+			<Run Text=">> " FontWeight="Bold" />
 			<Run Text="{Binding Preferences}" />
 		</TextBlock>
 
 		<TextBlock Margin="0,20,0,0"
 			Text="Secure storage" FontWeight="Bold" FontSize="16" />
 		<TextBlock TextWrapping="WrapWithOverflow">
-			<Run Text="Debug: " FontWeight="Bold" />
+			<Run Text=">> " FontWeight="Bold" />
 			<Run Text="{Binding Securities}" />
 		</TextBlock>
 
@@ -57,6 +57,20 @@
 		<TextBlock TextWrapping="WrapWithOverflow">
 			<Run Text="Path: " FontWeight="Bold" />
 			<Run Text="{Binding FilePickedPath}" />
+		</TextBlock>
+
+		<TextBlock Margin="0,20,0,0"
+		           Text="App Info" FontWeight="Bold" FontSize="16" />
+		<TextBlock TextWrapping="WrapWithOverflow">
+			<Run Text=">> " FontWeight="Bold" />
+			<Run Text="{Binding AppInfo}" />
+		</TextBlock>
+
+		<TextBlock Margin="0,20,0,0"
+		           Text="Device Info" FontWeight="Bold" FontSize="16" />
+		<TextBlock TextWrapping="WrapWithOverflow">
+			<Run Text=">> " FontWeight="Bold" />
+			<Run Text="{Binding DevInfo}" />
 		</TextBlock>
 		
 		<WrapPanel Margin="0,20,0,0" Orientation="Horizontal"
