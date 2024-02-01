@@ -14,6 +14,10 @@ namespace Marrow.XPlat.ApplicationModel.DataTransfer
 
         public Task SetTextAsync(string? text) => _current.SetTextAsync(text);
 
-        public Task<string?> GetTextAsync() => _current.GetTextAsync();
+        public async Task<string?> GetTextAsync()
+        {
+            var res = await _current.GetTextAsync();
+            return string.IsNullOrWhiteSpace(res) ? null : res;
+        }
     }
 }
