@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Mono.Cecil;
 
@@ -7,45 +8,54 @@ namespace Marrow.ApiReader
 {
     internal static class Reader
     {
-        internal static void Read(FoundDll dll)
+        internal static void Read(FoundDll dll, StreamWriter console)
         {
             using var ass = AssemblyDefinition.ReadAssembly(dll.Path);
-            foreach (var module in ass.Modules)
+            foreach (var module in ass.Modules
+                         .SelectMany(m => m.Types)
+                         .OrderBy(m => $"{m.Namespace}:{m.Name}")
+                         .GroupBy(t => t.Namespace))
             {
-                foreach (var type in module.Types)
+                if (string.IsNullOrWhiteSpace(module.Key))
+                    continue;
+
+                console.WriteLine();
+                console.WriteLine($" --- {Shorten(module.Key).Trim('_', '.')} ---");
+                console.WriteLine();
+                foreach (var type in module.OrderBy(t => t.Name))
                 {
                     var typeName = type.FullName;
 
                     if (type.IsInterface)
                     {
-                        Console.WriteLine($"    + {type}");
+                        console.WriteLine($"    + {Shorten(type)}");
 
-                        foreach (var method in type.Methods)
+                        foreach (var method in type.Methods.OrderBy(m => $"{m.Name}{m.Parameters.Count:00}"))
                         {
                             var methodStr = method.ToString();
                             methodStr = methodStr.Replace($"{typeName}::", string.Empty);
                             methodStr = PatchTypes(methodStr);
-                            Console.WriteLine($"       # {methodStr}");
+                            console.WriteLine($"       # {methodStr}");
                         }
                     }
                     else if (type.IsClass && typeName.EndsWith("Options"))
                     {
-                        Console.WriteLine($"    + {type}");
+                        console.WriteLine($"    + {Shorten(type)}");
 
-                        foreach (var prop in type.Properties)
+                        foreach (var prop in type.Properties.OrderBy(p => p.Name))
                         {
                             var propStr = prop.ToString();
                             propStr = propStr.Replace($"{typeName}::", string.Empty);
                             propStr = PatchTypes(propStr);
                             propStr = propStr.Replace("()", " { get; set; }");
-                            Console.WriteLine($"       # {propStr}");
+                            console.WriteLine($"       # {propStr}");
                         }
                     }
                     else if (type.IsEnum)
                     {
-                        Console.WriteLine($"    + {type}");
+                        console.WriteLine($"    + {Shorten(type)}");
 
-                        foreach (var field in type.Fields)
+                        foreach (var field in type.Fields.OrderBy(f => f.Name))
                         {
                             var fieldStr = field.ToString();
                             if (fieldStr.EndsWith("__"))
@@ -53,11 +63,19 @@ namespace Marrow.ApiReader
                             fieldStr = fieldStr.Replace($"{typeName}::", string.Empty);
                             fieldStr = fieldStr.Split(' ', 2).Last();
                             var @const = field.Constant;
-                            Console.WriteLine($"       # {fieldStr} = {@const}");
+                            console.WriteLine($"       # {fieldStr} = {@const}");
                         }
                     }
                 }
             }
+        }
+
+        private static string Shorten(object raw)
+        {
+            var text = raw.ToString() ?? string.Empty;
+            text = text.Replace(Program.MauiSpace, "_.");
+            text = text.Replace(Program.MyLibSpace, "_.");
+            return text;
         }
 
         private static readonly Dictionary<string, string> _patchTable = new()
@@ -85,16 +103,19 @@ namespace Marrow.ApiReader
             { "System.Collections.Generic.IDictionary`2", "IDictionary" },
             { "System.Collections.Generic.IReadOnlyList`1", "IReadOnlyList" },
             // MAUI stuff
-            { "Microsoft.Maui.Authentication.", "MMA." },
-            { "Microsoft.Maui.Storage.", "MMS." },
-            { "Microsoft.Maui.Media.", "MMM." },
-            { "Microsoft.Maui.Networking.", "MMN." },
-            { "Microsoft.Maui.Graphics.", "MMG." },
-            { "Microsoft.Maui.ApplicationModel.Communication.", "MMAMC." },
-            { "Microsoft.Maui.ApplicationModel.DataTransfer.", "MMAMD." },
-            { "Microsoft.Maui.ApplicationModel.", "MMAM." },
-            { "Microsoft.Maui.Devices.Sensors.", "MMDS." },
-            { "Microsoft.Maui.Devices.", "MMD." }
+            { $"{Program.MauiSpace}Authentication.", "MMA." },
+            { $"{Program.MauiSpace}Storage.", "MMS." },
+            { $"{Program.MauiSpace}Media.", "MMM." },
+            { $"{Program.MauiSpace}Networking.", "MMN." },
+            { $"{Program.MauiSpace}Graphics.", "MMG." },
+            { $"{Program.MauiSpace}ApplicationModel.Communication.", "MMAMC." },
+            { $"{Program.MauiSpace}ApplicationModel.DataTransfer.", "MMAMD." },
+            { $"{Program.MauiSpace}ApplicationModel.", "MMAM." },
+            { $"{Program.MauiSpace}Devices.Sensors.", "MMDS." },
+            { $"{Program.MauiSpace}Devices.", "MMD." },
+            // My stuff
+            { $"{Program.MyLibSpace}ApplicationModel.Communication.", "MMAMC." },
+            { $"{Program.MyLibSpace}Media.", "MMM." }
         };
 
         private static string PatchTypes(string text)
