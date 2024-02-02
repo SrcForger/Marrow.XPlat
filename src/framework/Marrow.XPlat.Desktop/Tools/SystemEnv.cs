@@ -50,5 +50,29 @@ namespace Marrow.XPlat.Tools
             }
             return dict.Count >= 1;
         }
+
+        public static bool TryGetPlistFile(string file, out Dictionary<string, string> dict)
+        {
+            dict = new Dictionary<string, string>();
+            if (File.Exists(file))
+            {
+                var plain = File.ReadAllText(file, Encoding.UTF8);
+                var items = plain.Split("<key>");
+                const string tmp = "</key>";
+                foreach (var item in items)
+                {
+                    var parts = item.Split(tmp, 2);
+                    if (parts.Length != 2)
+                        continue;
+                    var key = parts[0].ToLowerInvariant();
+                    var val = parts[1].Trim();
+                    var par = val.Split(["<string>", "</string>"], StringSplitOptions.None);
+                    if (par.Length == 3)
+                        val = par[1].Trim();
+                    dict[key] = val;
+                }
+            }
+            return dict.Count >= 1;
+        }
     }
 }

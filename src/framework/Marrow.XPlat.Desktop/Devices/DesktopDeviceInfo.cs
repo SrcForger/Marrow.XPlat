@@ -19,8 +19,8 @@ namespace Marrow.XPlat.Devices
         {
             if (OperatingSystem.IsWindows())
             {
-                var wVendor = "Microsoft";
-                var wName = "Windows";
+                const string wVendor = "Microsoft";
+                const string wName = "Windows";
                 var osStr = OSVersion.GetOperatingSystem().ToString();
                 var winVerId = Strings.Space(osStr).Replace(wName, string.Empty).Trim();
                 var winCodeName = OSVersion.MajorVersion10Properties().DisplayVersion;
@@ -32,11 +32,17 @@ namespace Marrow.XPlat.Devices
                 osRel.TryGetValue("version_id", out var distroVerId) &&
                 osRel.TryGetValue("version_codename", out var distroCodeName))
             {
-                return ("Linux", distroName, distroVerId, distroCodeName);
+                const string linName = "Linux";
+                return (linName, distroName, distroVerId, distroCodeName);
             }
-            if (OperatingSystem.IsMacOS())
+            if (OperatingSystem.IsMacOS() &&
+                SystemEnv.TryGetPlistFile("/System/Library/CoreServices/SystemVersion.plist", out var svp) &&
+                svp.TryGetValue("productname", out var macName) &&
+                svp.TryGetValue("productversion", out var macVerId) && 
+                svp.TryGetValue("productbuildversion", out var macCodeName))
             {
-                throw new NotImplementedException();
+                const string mVendor = "Apple";
+                return (macName, mVendor, macVerId, macCodeName);
             }
             throw new InvalidOperationException("No support for your OS!");
         }
