@@ -1,5 +1,7 @@
 using System;
 using Marrow.XPlat.Tools;
+using OSVersionExtension;
+using OperatingSystem = System.OperatingSystem;
 using DI = (string m, string n, string v, string c);
 
 namespace Marrow.XPlat.Devices
@@ -17,7 +19,12 @@ namespace Marrow.XPlat.Devices
         {
             if (OperatingSystem.IsWindows())
             {
-                throw new NotImplementedException();
+                var wVendor = "Microsoft";
+                var wName = "Windows";
+                var osStr = OSVersion.GetOperatingSystem().ToString();
+                var winVerId = Strings.Space(osStr).Replace(wName, string.Empty).Trim();
+                var winCodeName = OSVersion.MajorVersion10Properties().DisplayVersion;
+                return (wName, wVendor, winVerId, winCodeName);
             }
             if (OperatingSystem.IsLinux() &&
                 SystemEnv.TryGetEnvFile("/etc/os-release", out var osRel) &&
