@@ -14,9 +14,10 @@ namespace Marrow.XPlat.Avalonia.ApplicationModel.DataTransfer
             return text == null ? Clipboard.ClearAsync() : Clipboard.SetTextAsync(text);
         }
 
-        public Task<string?> GetTextAsync()
+        public async Task<string?> GetTextAsync()
         {
-            return Clipboard.GetTextAsync();
+            var res = await Clipboard.GetTextAsync();
+            return string.IsNullOrWhiteSpace(res) ? null : res;
         }
     }
 }

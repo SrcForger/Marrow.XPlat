@@ -12,7 +12,10 @@ namespace Marrow.XPlat.ApplicationModel.DataTransfer
             _current = current ?? MAD.Clipboard.Default;
         }
 
-        public Task SetTextAsync(string? text) => _current.SetTextAsync(text);
+        public Task SetTextAsync(string? text)
+        {
+            return _current.SetTextAsync(text);
+        }
 
         public async Task<string?> GetTextAsync()
         {
