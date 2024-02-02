@@ -43,6 +43,8 @@ namespace Marrow.ApiReader
 
                         foreach (var prop in type.Properties.OrderBy(p => p.Name))
                         {
+                            if (prop?.GetMethod?.IsStatic ?? false)
+                                continue;
                             var propStr = prop.ToString();
                             propStr = propStr.Replace($"{typeName}::", string.Empty);
                             propStr = PatchTypes(propStr);
@@ -114,6 +116,7 @@ namespace Marrow.ApiReader
             { $"{Program.MauiSpace}Devices.", "MMD." },
             // My stuff
             { $"{Program.MyLibSpace}ApplicationModel.Communication.", "MMAMC." },
+            { $"{Program.MyLibSpace}Storage.", "MMS." },
             { $"{Program.MyLibSpace}Media.", "MMM." }
         };
 
