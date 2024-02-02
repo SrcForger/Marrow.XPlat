@@ -21,6 +21,7 @@ namespace Marrow.XPlat.Setup
             builder.AddSingleton<IScreenshot, MobileScreenshot>();
             builder.AddSingleton<IClipboard, MobileClipboard>();
             builder.AddSingleton<IFilePicker, MobileFilePicker>();
+            builder.AddSingleton<IMediaPicker, MobileMediaPicker>();
             builder.AddSingleton<IAppInfo, MobileAppInfo>();
             builder.AddSingleton<IDeviceInfo, MobileDeviceInfo>();
             return builder;

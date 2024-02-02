@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using MMS = Microsoft.Maui.Storage;
@@ -46,20 +45,6 @@ namespace Marrow.XPlat.Storage
             var res = await _current.PickMultipleAsync(config);
             var conv = res.Select(result => Convert(result)!);
             return conv;
-        }
-
-        private sealed class FileResult : IFileResult
-        {
-            private readonly MMS.FileResult _wrap;
-
-            public FileResult(MMS.FileResult wrap)
-            {
-                _wrap = wrap;
-            }
-
-            public string FileName => _wrap.FileName;
-            public string FullPath => _wrap.FullPath;
-            public Task<Stream> OpenReadAsync() => _wrap.OpenReadAsync();
         }
     }
 }

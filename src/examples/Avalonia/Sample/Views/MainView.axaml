@@ -81,6 +81,7 @@
 			<Button Content="Write CB!" Click="SetClipTxtClick" />
 			<Button Content="Read CB!" Click="ReadClipTxtClick" />
 			<Button Content="Pick file!" Click="PickFileClick" />
+			<Button Content="Pick media!" Click="PickMediaClick" />
 			<Button Content="Refresh!"  Click="RefreshClick" />
 		</WrapPanel>
 	</StackPanel>

@@ -15,6 +15,7 @@ namespace Marrow.XPlat.Avalonia.Setup
             builder.AddSingleton<IScreenshot, AvalScreenshot>();
             builder.AddSingleton<IClipboard, AvalClipboard>();
             builder.AddSingleton<IFilePicker, AvalFilePicker>();
+            builder.AddSingleton<IMediaPicker, AvalMediaPicker>();
             return builder;
         }
     }

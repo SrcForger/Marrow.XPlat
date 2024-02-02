@@ -73,19 +73,31 @@ namespace Sample.Views
         {
             var filePicker = SvcAppLocator.Get<IFilePicker>();
 
-            var options = new PickOptions { PickerTitle = "Please select an image file" };
-            if (await PickAndShow(filePicker, options) is { } result)
+            var options = new PickOptions { PickerTitle = "Please select a JPG/PNG image file!" };
+            if (await PickAndShow(() => filePicker.PickAsync(options)) is { } result)
             {
                 Model.FilePickedName = result.FileName;
                 Model.FilePickedPath = result.FullPath;
             }
         }
 
-        private async Task<IFileResult?> PickAndShow(IFilePicker filePicker, PickOptions options)
+        private async void PickMediaClick(object? sender, RoutedEventArgs e)
+        {
+            var mediaPicker = SvcAppLocator.Get<IMediaPicker>();
+
+            var options = new MediaPickerOptions { Title = "Select some image file or what?" };
+            if (await PickAndShow(() => mediaPicker.PickPhotoAsync(options)) is { } result)
+            {
+                Model.FilePickedName = result.FileName;
+                Model.FilePickedPath = result.FullPath;
+            }
+        }
+
+        private async Task<IFileResult?> PickAndShow(Func<Task<IFileResult?>> func)
         {
             try
             {
-                var result = await filePicker.PickAsync(options);
+                var result = await func();
                 if (result != null)
                 {
                     if (result.FileName.EndsWith("jpg", StringComparison.OrdinalIgnoreCase) ||
