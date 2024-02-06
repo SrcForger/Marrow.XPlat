@@ -12,6 +12,7 @@ It is a cross platform (desktop and mobile) application framework for .NET which
 | ApplicationModel | IBrowser | OpenAsync(uri) |
 | ApplicationModel | IEmail | IsComposeSupported, ComposeAsync(message) |
 | DataTransfer | IClipboard | GetTextAsync(), SetTextAsync(string) |
+| DataTransfer | IShare | RequestAsync(ShareTextReq / ShareFileReq / ShareMultipleFilesReq) |
 | Devices | IDeviceInfo | Manufacturer, Model, Name, VersionString |
 | Media | IMediaPicker | PickPhotoAsync(opts), PickVideoAsync(opts) |
 | Media | IScreenshot | CaptureAsync(), IsCaptureSupported |

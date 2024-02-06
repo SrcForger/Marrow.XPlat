@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
@@ -143,6 +144,50 @@ namespace Sample.Views
                 };
                 await email.ComposeAsync(message);
             }
+        }
+
+        private async void ShareTextClick(object? sender, RoutedEventArgs e)
+        {
+            var share = SvcAppLocator.Get<IShare>();
+
+            var text = $"Some text";
+            var uri = "http://www.yahoo.com";
+            await share.RequestAsync(new ShareTextRequest
+            {
+                Text = text, Uri = uri, Title = "Share Web Link"
+            });
+        }
+
+        private async void ShareFileClick(object? sender, RoutedEventArgs e)
+        {
+            var fileSystem = SvcAppLocator.Get<IFileSystem>();
+            var share = SvcAppLocator.Get<IShare>();
+
+            var fn = "Attachment.txt";
+            var file = Path.Combine(fileSystem.CacheDirectory, fn);
+            File.WriteAllText(file, "Hello World");
+
+            await share.RequestAsync(new ShareFileRequest
+            {
+                Title = "Share text file", File = new ShareFile(file)
+            });
+        }
+
+        private async void ShareFilesClick(object? sender, RoutedEventArgs e)
+        {
+            var fileSystem = SvcAppLocator.Get<IFileSystem>();
+            var share = SvcAppLocator.Get<IShare>();
+
+            var file1 = Path.Combine(fileSystem.CacheDirectory, "Attachment1.txt");
+            var file2 = Path.Combine(fileSystem.CacheDirectory, "Attachment2.txt");
+            File.WriteAllText(file1, "Content 1");
+            File.WriteAllText(file2, "Content 2");
+
+            await share.RequestAsync(new ShareMultipleFilesRequest
+            {
+                Title = "Share multiple files",
+                Files = new List<ShareFile> { new ShareFile(file1), new ShareFile(file2) }
+            });
         }
     }
 }

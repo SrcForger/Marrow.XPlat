@@ -82,6 +82,9 @@
 			<Button Content="Read CB!" Click="ReadClipTxtClick" />
 			<Button Content="Pick file!" Click="PickFileClick" />
 			<Button Content="Pick media!" Click="PickMediaClick" />
+			<Button Content="Share text!" Click="ShareTextClick" />
+			<Button Content="Share file!" Click="ShareFileClick" />
+			<Button Content="Share files!" Click="ShareFilesClick" />
 			<Button Content="Refresh!"  Click="RefreshClick" />
 		</WrapPanel>
 	</StackPanel>
