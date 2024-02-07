@@ -2,11 +2,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:vm="clr-namespace:Marrow.XPlat.Avalonia"
         mc:Ignorable="d" 
 		d:DesignWidth="400" d:DesignHeight="590"
 		Width="400" Height="590"
         x:Class="Marrow.XPlat.Avalonia.AvalShareWindow"
-        Title="AvalShareWindow"
+		x:DataType="vm:AvalShareWindowModel"
+        Title="{Binding Title}"
 		TransparencyLevelHint="AcrylicBlur"
         ExtendClientAreaToDecorationsHint="True">
 	<Panel>
@@ -20,8 +22,23 @@
 			</ExperimentalAcrylicBorder.Material>
 		</ExperimentalAcrylicBorder>
 
-		<Panel Margin="40">
+		<Grid Margin="40" HorizontalAlignment="Center">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*" />
+				<RowDefinition Height="*" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+			
+			<TextBlock Grid.Row="0" Grid.Column="0"
+					   Text="{Binding Title}" 
+					   FontSize="18" FontWeight="Bold" />
 
-		</Panel>
+			<TextBlock Grid.Row="1" Grid.Column="0"
+					   Text="{Binding Text}" FontSize="14" />
+
+			<Button Grid.Row="2" Grid.Column="0"
+					Content="Copy to Clipboard"
+					Command="{Binding CopyClickCommand}" />
+		</Grid>
 	</Panel>
 </Window>

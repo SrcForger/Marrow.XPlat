@@ -1,38 +1,49 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Avalonia.Controls;
 using Marrow.XPlat.ApplicationModel.DataTransfer;
 using Marrow.XPlat.Avalonia.Tools;
-using AIP = Avalonia.Input.Platform;
 
 namespace Marrow.XPlat.Avalonia.ApplicationModel.DataTransfer
 {
     public sealed class AvalShare : IShare
     {
-        private static AIP.IClipboard Clipboard => UiHelper.GetTopLevel()?.Clipboard!;
-
         public async Task RequestAsync(ShareTextRequest request)
         {
-            await ShowModal();
-
-            throw new System.NotImplementedException();
+            var plain = (request.Text + Environment.NewLine + request.Uri).Trim();
+            var model = new AvalShareWindowModel
+            {
+                Title = request.Title, Text = plain
+            };
+            await ShowModal(model);
         }
 
-        public Task RequestAsync(ShareFileRequest request)
+        public async Task RequestAsync(ShareFileRequest request)
         {
-
-            throw new System.NotImplementedException();
+            var model = new AvalShareWindowModel
+            {
+                Title = request.Title
+            };
+            await ShowModal(model);
         }
 
-        public Task RequestAsync(ShareMultipleFilesRequest request)
+        public async Task RequestAsync(ShareMultipleFilesRequest request)
         {
-
-            throw new System.NotImplementedException();
+            var model = new AvalShareWindowModel
+            {
+                Title = request.Title
+            };
+            await ShowModal(model);
         }
 
-        private static async Task ShowModal()
+        private static async Task ShowModal(AvalShareWindowModel model)
         {
             var owner = (Window)UiHelper.GetMainView()!;
-            var window = new AvalShareWindow();
+            var window = new AvalShareWindow
+            {
+                DataContext = model
+            };
+            model.Closer = window.Close;
             await window.ShowDialog(owner);
         }
     }
