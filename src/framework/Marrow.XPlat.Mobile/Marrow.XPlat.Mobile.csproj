@@ -19,4 +19,9 @@
     <ProjectReference Include="..\Marrow.XPlat.API\Marrow.XPlat.API.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="..\..\..\assets\icon.png" Pack="true" PackagePath=""/>
+    <None Include="..\..\..\README.md" Pack="true" PackagePath=""/>
+  </ItemGroup>
+
 </Project>
