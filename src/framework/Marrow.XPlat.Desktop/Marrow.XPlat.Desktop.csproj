@@ -12,22 +12,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="OSVersionExt.NetStd" Version="3.0.1" />
     <PackageReference Include="Tomlyn" Version="0.17.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <!-- <PackageReference Include="OSVersionExt" Version="3.0.0" /> -->
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="OSVersionExtension">
-      <HintPath>lib\OSVersionExtension.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="..\..\..\assets\icon.png" Pack="true" PackagePath=""/>
-    <None Include="..\..\..\README.md" Pack="true" PackagePath=""/>
+    <None Include="..\..\..\assets\icon.png" Pack="true" PackagePath="" />
+    <None Include="..\..\..\README.md" Pack="true" PackagePath="" />
   </ItemGroup>
 
 </Project>
