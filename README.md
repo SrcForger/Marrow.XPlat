@@ -4,6 +4,16 @@
 
 It is a cross platform (desktop and mobile) application framework for .NET which aims to close the gap between differently evolved systems by providing reliable real APIs for everyone.
 
+## Structure
+
+| *NuGet* | Package | Notes |
+| --- | --- | --- |
+| [![NuGet](https://img.shields.io/nuget/v/Marrow.XPlat.API.svg)](https://www.nuget.org/packages/Marrow.XPlat.API/) | Marrow.XPlat.API | The core interface abstraction |
+| [![NuGet](https://img.shields.io/nuget/v/Marrow.XPlat.Desktop.svg)](https://www.nuget.org/packages/Marrow.XPlat.Desktop/) | Marrow.XPlat.Desktop | Platform module for desktop |
+| [![NuGet](https://img.shields.io/nuget/v/Marrow.XPlat.Mobile.svg)](https://www.nuget.org/packages/Marrow.XPlat.Mobile/) | Marrow.XPlat.Mobile | Platform module for mobile |
+| [![NuGet](https://img.shields.io/nuget/v/Marrow.XPlat.Avalonia.svg)](https://www.nuget.org/packages/Marrow.XPlat.Avalonia/) | Marrow.XPlat.Avalonia | Use Avalonia for desktop |
+| [![NuGet](https://img.shields.io/nuget/v/Marrow.XPlat.Utils.svg)](https://www.nuget.org/packages/Marrow.XPlat.Utils/) | Marrow.XPlat.Utils | Some tools and extensions |
+
 ## Status
 
 | Group | Interface | Members |
